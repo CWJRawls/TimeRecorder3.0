@@ -29,8 +29,6 @@ public class DatePanel extends JPanel {
 		
 		Dimension d = WindowReference.getDimension();
 		
-		int topSpace = ((d.height - verticalSpace) / 2) - (verticalSpace / 2);
-		
 		int leftSpace = (int)(((d.width / 2) * 0.1) / 2);
 		
 		labels = new JLabel[texts.length];
@@ -43,19 +41,12 @@ public class DatePanel extends JPanel {
 		Font lFont = labels[0].getFont();
 		int sWidth = labels[0].getFontMetrics(lFont).stringWidth(texts[2]);
 		
-		System.out.println("String Width: " + sWidth);
 		
 		int cWidth = (int)((d.width / 2) * 0.9);
 		
-		System.out.println("Width: " + cWidth);
-		
 		double wRatio = (double)cWidth / (double)sWidth;
 		
-		System.out.println("Width Ratio: " + wRatio);
-		
 		int nFontSize = (int)(lFont.getSize() * wRatio);
-		
-		System.out.println("Original Font Size: " + lFont.getSize() + " | New Font Size: " + nFontSize);
 		
 		Font nFont = new Font(lFont.getName(), Font.BOLD, nFontSize);
 		
@@ -63,33 +54,31 @@ public class DatePanel extends JPanel {
 		{
 			nFontSize--;
 			nFont = new Font(lFont.getName(), Font.BOLD, nFontSize);
-			System.out.print(nFontSize + " | ");
 		}
-		
-		System.out.println();
 		
 		textW = new int[3];
 		
 		for(int i = 0; i < texts.length; i++)
 		{
 			textW[i] = labels[0].getFontMetrics(nFont).stringWidth(texts[i]);
-			System.out.print("Line " + i + ": " + textW[i] + " | ");
 		}
 		
-		System.out.println();
-		
 		findCenteringSpace();
+		
+		int vSpace = (labels[0].getFontMetrics(nFont).getHeight() * texts.length) + (labSpace * 2);
+		
+		int topSpace = (d.height - vSpace) / 2;
+		
+		topSpace -= (int)(topSpace * 0.1);
 		
 		for(int i = 0; i < labels.length; i++)
 		{
 			labels[i].setFont(nFont);
-			labels[i].setBounds(leftSpace + lSpacing[i], (50 + (i * labels[i].getFontMetrics(nFont).getHeight()) + (i * labSpace)), textW[i], labels[i].getFontMetrics(nFont).getHeight());
+			labels[i].setBounds(leftSpace + lSpacing[i], (topSpace + (i * labels[i].getFontMetrics(nFont).getHeight()) + (i * labSpace)), textW[i], labels[i].getFontMetrics(nFont).getHeight());
 			this.add(labels[i]);
 		}
 		
 		Dimension curr = new Dimension(d.width / 2, d.height);
-		
-		System.out.println("Horizontal Space = " + labelScale[0] + " Left Space = " + leftSpace + " Total Horizontal = " + curr.width);
 		
 		this.setPreferredSize(curr);
 	}
