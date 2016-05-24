@@ -86,11 +86,11 @@ public class DataImporter {
 		} catch (FileNotFoundException e) {
 			RecorderMain.updateStatus("Could not open file, data not loaded!");
 			RecorderMain.updateStatus("Data not loaded!\n");
-			RecorderMain.printStartingOptions();
-			RecorderMain.startingOptions();
+			//RecorderMain.printStartingOptions();
+			//RecorderMain.startingOptions();
 		}
 		
-		RecorderMain.getDateandFile();
+		//RecorderMain.getDateandFile();
 		
 		
 		
@@ -112,23 +112,23 @@ public class DataImporter {
 			ois.close();
 			
 			RecorderMain.updateStatus("Data loaded!");
-			RecorderMain.getDateandFile();
+			//RecorderMain.getDateandFile();
 			
 			
 		} catch (FileNotFoundException e) {
 			
 			RecorderMain.updateStatus("File not found!\n");
-			RecorderMain.printStartingOptions();
+			//RecorderMain.printStartingOptions();
 			
 		} catch (IOException e) {
 			
 			RecorderMain.updateStatus("Could not load file!\n");
-			RecorderMain.printStartingOptions();
+			//RecorderMain.printStartingOptions();
 			
 		} catch (ClassNotFoundException e) {
 			
 			RecorderMain.updateStatus("Error reading data, file not loaded!\n");
-			RecorderMain.printStartingOptions();
+			//RecorderMain.printStartingOptions();
 			
 		}
 	}

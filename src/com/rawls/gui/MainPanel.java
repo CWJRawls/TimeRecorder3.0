@@ -56,6 +56,13 @@ public class MainPanel extends JPanel implements ActionListener{
 		this.add(jsp);
 	}
 
+	public void switchToDateView()
+	{	
+		jsp.setRightComponent(new DatePanel());
+		jsp.setLeftComponent(new DatePanel());
+		this.revalidate();
+		this.repaint();
+	}
 	
 	public void switchToTeamView()
 	{

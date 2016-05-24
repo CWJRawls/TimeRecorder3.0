@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.rawls.main.RecorderMain;
+
 public class StartPanelButtons extends JPanel implements ActionListener{
 
 	
@@ -35,12 +37,15 @@ public class StartPanelButtons extends JPanel implements ActionListener{
 		
 		text = new JButton("Create New Team From Roster Text File");
 		text.setBounds(dButOrig[0], dButOrig[1], dButScale[0], dButScale[1]);
+		text.addActionListener(this);
 		
 		roster = new JButton("Load Existing Team File");
 		roster.setBounds(dButOrig[0], dButOrig[1] + dButSpacing[1], dButScale[0], dButScale[1]);
+		roster.addActionListener(this);
 		
 		about = new JButton("About TimeRecorder");
 		about.setBounds(dButOrig[0], dButOrig[1] + (dButSpacing[1] * 2), dButScale[0], dButScale[1]);
+		about.addActionListener(this);
 		
 		this.add(text);
 		this.add(roster);
@@ -50,7 +55,19 @@ public class StartPanelButtons extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if(e.getSource().equals(text))
+		{
+			RecorderMain.changeToDatePanels();
+		}
+		else if(e.getSource().equals(roster))
+		{
+			RecorderMain.changeToDatePanels();
+		}
+		else if(e.getSource().equals(about))
+		{
+			RecorderMain.changeToDatePanels();
+		}
 		
 	}
 }

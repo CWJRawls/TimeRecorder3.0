@@ -14,7 +14,7 @@ import com.rawls.storage.SwimmerMasterList;
 public class RecorderMain {
 	
 	private static boolean ready = false;
-	
+	/*
 	private static char select = ' ';
 	
 	private static String defaultPath = ".";
@@ -32,8 +32,10 @@ public class RecorderMain {
 	private static String givenPath = "";
 	
 	private static int optionFlag = -1;
-	
+	*/
 	private static String vNum = "v0.3";
+	
+	private static MainFrame mf;
 	
 	public static void start() 
 	{	/*
@@ -49,10 +51,15 @@ public class RecorderMain {
 		startingOptions();
 		*/
 		
-		MainFrame mf = new MainFrame("TimeRecorder");
+		mf = new MainFrame("TimeRecorder");
 		
 	}
 	
+	public static void changeToDatePanels()
+	{
+		mf.changeToDatePanel();
+	}
+	/*
 	public static void printStartingOptions()
 	{
 		System.out.println(startOptions);
@@ -778,12 +785,12 @@ public class RecorderMain {
 		//r.setTime(vrPane.getMins(), vrPane.getSec(), vrPane.getMili()); 
 		
 	}
-	
+	*/
 	public static void updateStatus(String status)
 	{
 		System.out.println(status);
 	}
-	
+	/*
 	public static void exportTimes(File aF)
 	{
 		SwimmerMasterList.sort();
@@ -807,4 +814,6 @@ public class RecorderMain {
 		String result = "Team Tempe Tigersharks 2014";
 		return result;
 	}
+	
+	*/
 }
