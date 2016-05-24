@@ -5,7 +5,7 @@ import java.awt.Dimension;
 public class WindowReference {
 
 	private static double[] MOD_LARGE = {1.0,1.0};
-	private static double[] MOD_MEDIUM = {0.75, 0.7467};
+	private static double[] MOD_MEDIUM = {0.6667, 0.7467};
 	private static double[] MOD_SMALL = {0.5, 0.5};
 	
 	public static final int WINDOW_LARGE = 0;
@@ -13,7 +13,7 @@ public class WindowReference {
 	public static final int WINDOW_SMALL = 2;
 	
 	public static final Dimension SIZE_LARGE = new Dimension(1500,750);
-	public static final Dimension SIZE_MEDIUM = new Dimension(1125, 560);
+	public static final Dimension SIZE_MEDIUM = new Dimension(1000, 560);
 	public static final Dimension SIZE_SMALL = new Dimension(750, 375);
 	
 	private static int windowSize = WINDOW_MEDIUM;

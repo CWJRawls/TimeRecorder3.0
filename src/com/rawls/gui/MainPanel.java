@@ -59,7 +59,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	public void switchToDateView()
 	{	
 		jsp.setRightComponent(new DatePanel());
-		jsp.setLeftComponent(new DatePanel());
+		jsp.setLeftComponent(new DatePanelEntry());
 		this.revalidate();
 		this.repaint();
 	}

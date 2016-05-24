@@ -37,6 +37,8 @@ public class RecorderMain {
 	
 	private static MainFrame mf;
 	
+	private static String date = "01/01/1970";
+	
 	public static void start() 
 	{	/*
 		updateStatus("");
@@ -58,6 +60,16 @@ public class RecorderMain {
 	public static void changeToDatePanels()
 	{
 		mf.changeToDatePanel();
+	}
+	
+	public static void changeDate(String d)
+	{
+		date = d;
+	}
+	
+	public static void changeToTeamView()
+	{
+		
 	}
 	/*
 	public static void printStartingOptions()

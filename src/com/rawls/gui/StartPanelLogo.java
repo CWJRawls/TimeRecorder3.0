@@ -39,8 +39,8 @@ public class StartPanelLogo extends JPanel{
 			e.printStackTrace();
 		}
 		
-		int[] iLoc = WindowReference.getNewDims(75, 75);
-		int[] scale = WindowReference.getNewDims(oScale[0], oScale[1]);
+		int[] iLoc = {(int)(curr.width * 0.05), (int)(curr.width * 0.05)};
+		int[] scale = {(int)(curr.width * 0.9), (int) (curr.width * 0.9)};
 		
 		System.out.println("X: " + iLoc[0] + " Y: " + iLoc[1]);
 		System.out.println("X-Dim: " + scale[0] + " Y-Dim: " + scale[1]);
