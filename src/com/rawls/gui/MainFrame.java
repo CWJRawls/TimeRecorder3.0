@@ -30,4 +30,9 @@ public class MainFrame extends JFrame{
 		mp.switchToDateView();
 	}
 	
+	public void switchToTeamPanel()
+	{
+		mp.switchToTeamView();
+	}
+	
 }

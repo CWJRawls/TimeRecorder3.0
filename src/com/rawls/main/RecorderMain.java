@@ -1,5 +1,6 @@
 package com.rawls.main;
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -48,6 +49,10 @@ public class RecorderMain {
 	private static String date = "01/01/1970";
 	
 	public static int open_method = OPEN_NEW;
+	
+	//Controls on where to save the team file
+	public static boolean file_save_set = false;
+	public static String file_path = "";
 	
 	public static void start() 
 	{	/*
@@ -98,7 +103,7 @@ public class RecorderMain {
 	
 	public static void changeToTeamView()
 	{
-		
+		mf.switchToTeamPanel();
 	}
 	
 	
@@ -130,7 +135,17 @@ public class RecorderMain {
 		{
 			File rosterFile = jop.getSelectedFile();
 			
-			return DataImporter.importFromXML(rosterFile);
+			try {
+				file_path = rosterFile.getCanonicalPath();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			boolean temp = DataImporter.importFromXML(rosterFile);
+			
+			if(temp)
+				file_save_set = true;
+			
+			return temp;
 		}
 		else
 		{

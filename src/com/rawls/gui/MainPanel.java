@@ -66,7 +66,7 @@ public class MainPanel extends JPanel implements ActionListener{
 	
 	public void switchToTeamView()
 	{
-		
+		jsp.setRightComponent(new TeamListPanel());
 	}
 	
 	public void switchToSwimmerView(Swimmer s)
