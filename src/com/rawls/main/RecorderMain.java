@@ -2,6 +2,10 @@ package com.rawls.main;
 import java.io.File;
 import java.util.Scanner;
 import java.util.Vector;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 
 import com.rawls.data.Record;
@@ -12,6 +16,10 @@ import com.rawls.io.DataImporter;
 import com.rawls.storage.SwimmerMasterList;
 
 public class RecorderMain {
+	
+	public static final int OPEN_TEAM = 0;
+	public static final int OPEN_ROSTER = 1;
+	public static final int OPEN_NEW = 2;
 	
 	private static boolean ready = false;
 	/*
@@ -39,6 +47,8 @@ public class RecorderMain {
 	
 	private static String date = "01/01/1970";
 	
+	public static int open_method = OPEN_NEW;
+	
 	public static void start() 
 	{	/*
 		updateStatus("");
@@ -47,21 +57,40 @@ public class RecorderMain {
 		updateStatus("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		updateStatus("");
 		
-		SwimmerMasterList.initList();
-		
 		printStartingOptions();
 		startingOptions();
 		*/
 		
 		mf = new MainFrame("TimeRecorder");
 		
+		SwimmerMasterList.initList();
+		
 	}
 	
-	public static void changeToDatePanels()
+	public static void changeToDatePanels(int open_step)
 	{
-		mf.changeToDatePanel();
+		
+		boolean loadStatus = false;
+		
+		//Check the mode by which we are going to open a team
+		switch(open_step)
+		{
+		case OPEN_TEAM:
+			loadStatus = openFromXML();
+			break;
+		case OPEN_ROSTER:
+			loadStatus = openFromRoster();
+			break;
+		case OPEN_NEW:
+			loadStatus = true;
+			break;
+		}
+		
+		if(loadStatus)
+			mf.changeToDatePanel();
 	}
 	
+	//Method to change the current date
 	public static void changeDate(String d)
 	{
 		date = d;
@@ -71,6 +100,55 @@ public class RecorderMain {
 	{
 		
 	}
+	
+	
+	private static boolean openFromRoster()
+	{
+		JFileChooser jop = new JFileChooser();
+		
+		int result = jop.showOpenDialog(null);
+		
+		if(result == JFileChooser.APPROVE_OPTION)
+		{
+			File rosterFile = jop.getSelectedFile();
+			
+			return DataImporter.importFromText(rosterFile);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	private static boolean openFromXML()
+	{
+		JFileChooser jop = new JFileChooser();
+		
+		int result = jop.showOpenDialog(null);
+		
+		if(result == JFileChooser.APPROVE_OPTION)
+		{
+			File rosterFile = jop.getSelectedFile();
+			
+			return DataImporter.importFromXML(rosterFile);
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/*----------------------------------------------------------------*/
+	/*------------------------ OLD METHODS ---------------------------*/
+	/*----------------------------------------------------------------*/
+	
 	/*
 	public static void printStartingOptions()
 	{
@@ -800,7 +878,7 @@ public class RecorderMain {
 	*/
 	public static void updateStatus(String status)
 	{
-		System.out.println(status);
+		//System.out.println(status);
 	}
 	/*
 	public static void exportTimes(File aF)

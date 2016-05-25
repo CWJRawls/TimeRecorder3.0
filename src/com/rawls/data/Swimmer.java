@@ -26,6 +26,15 @@ public class Swimmer implements Serializable, Comparable<Swimmer>{
 		records = new ArrayList<Record>();
 		this.fName = fName;
 		this.lName = lName;
+		age = -1;
+	}
+	
+	public Swimmer(String fName, String lName, int age)
+	{
+		records = new ArrayList<Record>();
+		this.fName = fName;
+		this.lName = lName;
+		this.age = age;
 	}
 	
 	public String getFName()

@@ -58,15 +58,15 @@ public class StartPanelButtons extends JPanel implements ActionListener{
 		
 		if(e.getSource().equals(text))
 		{
-			RecorderMain.changeToDatePanels();
+			RecorderMain.changeToDatePanels(RecorderMain.OPEN_ROSTER);
 		}
 		else if(e.getSource().equals(roster))
 		{
-			RecorderMain.changeToDatePanels();
+			RecorderMain.changeToDatePanels(RecorderMain.OPEN_TEAM);
 		}
 		else if(e.getSource().equals(about))
 		{
-			RecorderMain.changeToDatePanels();
+			RecorderMain.changeToDatePanels(RecorderMain.OPEN_NEW);
 		}
 		
 	}

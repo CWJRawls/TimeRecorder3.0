@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import com.rawls.data.Record;
 import com.rawls.data.Swimmer;
 import com.rawls.main.RecorderMain;
@@ -24,7 +26,7 @@ public class DataImporter {
 	}
 	
 	//Uses objectinputstream to handle export method
-	public static void importFromXML(File xmlFile)
+	public static boolean importFromXML(File xmlFile)
 	{
 		ObjectInputStream ois;
 		try {
@@ -49,14 +51,18 @@ public class DataImporter {
 			}
 		}
 		 catch (Exception e) {
-			 
-			RecorderMain.updateStatus("File Read Error, data not loaded");
+		
+			JOptionPane.showMessageDialog(null, "Error Opening File!");
+			return false;
+			
 		}
+		
+		return true;
 		
 		
 	}
 	
-	public static void importFromText(File textFile)
+	public static boolean importFromText(File textFile)
 	{
 		try {
 			Scanner scan = new Scanner(textFile);
@@ -64,19 +70,28 @@ public class DataImporter {
 			while(scan.hasNext())
 			{
 				String in = scan.nextLine();
+				System.out.println(in);
 				String first = "";
 				String last = "";
+				int age = 99;
 				
-				for(int i = 0; i < in.length(); i++)
+				String[] parts = in.split("[|]");
+				
+				for(int i = 0; i < parts[0].length(); i++)
 				{
 					if(in.charAt(i) == ',')
 					{
-						last = in.substring(0, i);
-						first = in.substring(i + 2);
+						last = parts[0].substring(0, i);
+						first = parts[0].substring(i + 2);
 					}
 				}
 				
-				SwimmerMasterList.addSwimmer(new Swimmer(first, last));
+				if(parts.length > 1)
+				{
+					age = Integer.parseInt(parts[1]);
+				}
+				
+				SwimmerMasterList.addSwimmer(new Swimmer(first, last, age));
 				RecorderMain.updateStatus("Data loaded!\n");
 				
 			}
@@ -84,11 +99,20 @@ public class DataImporter {
 			scan.close();
 			
 		} catch (FileNotFoundException e) {
-			RecorderMain.updateStatus("Could not open file, data not loaded!");
-			RecorderMain.updateStatus("Data not loaded!\n");
+			//RecorderMain.updateStatus("Could not open file, data not loaded!");
+			//RecorderMain.updateStatus("Data not loaded!\n");
 			//RecorderMain.printStartingOptions();
 			//RecorderMain.startingOptions();
+			
+			JOptionPane.showMessageDialog(null, "Error, Could Not Read File!");
+			return false;
 		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Error, Could Not Read File!");
+			return false;
+		}
+		
+		return true;
 		
 		//RecorderMain.getDateandFile();
 		
@@ -96,6 +120,7 @@ public class DataImporter {
 		
 	}
 
+	/* !!!!! This Method is Legacy and is no Longer Called !!!!! */
 	public static void importFromSerial(File serialFile)
 	{
 		try {
