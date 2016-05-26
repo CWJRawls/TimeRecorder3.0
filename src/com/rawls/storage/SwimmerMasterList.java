@@ -47,9 +47,6 @@ public class SwimmerMasterList {
 			swimmerList.set(i, temp[i]);
 			swimmerList.get(i).assignID(i);
 		}
-		
-		
-		
 	}
 	
 	public static void addSwimmer(Swimmer s)

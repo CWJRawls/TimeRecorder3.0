@@ -35,6 +35,8 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 	StartPanelButtons spb;
 	DatePanel dp;
 	DatePanelEntry dpe;
+	TeamListPanel tlp;
+	TeamButtonPanel tbp;
 	
 	
 	//Status Tracker
@@ -87,7 +89,10 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 	
 	public void switchToTeamView()
 	{
-		jsp.setRightComponent(new TeamListPanel());
+		tlp = new TeamListPanel();
+		tbp = new TeamButtonPanel(tlp);
+		jsp.setRightComponent(tlp);
+		jsp.setLeftComponent(tbp);
 		this.revalidate();
 		this.repaint();
 	}

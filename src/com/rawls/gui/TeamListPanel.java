@@ -29,6 +29,7 @@ public class TeamListPanel extends JPanel implements TRComponent{
 		this.setLayout(new GridLayout(1, 1));
 		
 		teamList = new JList<String>(SwimmerMasterList.getListDisplay());
+		teamList.setSelectedIndex(0);
 		
 		JScrollPane listPane = new JScrollPane(teamList);
 		
@@ -40,6 +41,11 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	public int getSelectedIndex()
 	{
 		return teamList.getSelectedIndex();
+	}
+	
+	public void updateList()
+	{
+		teamList.setListData(SwimmerMasterList.getListDisplay());
 	}
 	
 	private boolean isContinuous(int s, int ms)
