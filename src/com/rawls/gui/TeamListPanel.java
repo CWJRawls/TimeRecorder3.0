@@ -8,7 +8,7 @@ import java.util.Calendar;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-public class TeamListPanel extends JPanel{
+public class TeamListPanel extends JPanel implements TRComponent{
 	
 	private JList<String> teamList;
 	
@@ -176,5 +176,6 @@ public class TeamListPanel extends JPanel{
 		dKeyMili = ms;
 		
 	}
+
 
 }
