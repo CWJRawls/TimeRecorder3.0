@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.rawls.main.RecorderMain;
+import com.sun.glass.events.KeyEvent;
 
 public class StartPanelButtons extends JPanel implements ActionListener, TRComponent{
 
@@ -35,15 +36,15 @@ public class StartPanelButtons extends JPanel implements ActionListener, TRCompo
 		int[] dEdgeSpacing = WindowReference.getNewDims(edgeSpacing[0], edgeSpacing[1]);
 		int[] dButOrig = WindowReference.getNewDims(butOrig[0], butOrig[1]);
 		
-		text = new JButton("Create New Team From Roster Text File");
+		text = new JButton("1. Create New Team From Roster Text File");
 		text.setBounds(dButOrig[0], dButOrig[1], dButScale[0], dButScale[1]);
 		text.addActionListener(this);
 		
-		roster = new JButton("Load Existing Team File");
+		roster = new JButton("2. Load Existing Team File");
 		roster.setBounds(dButOrig[0], dButOrig[1] + dButSpacing[1], dButScale[0], dButScale[1]);
 		roster.addActionListener(this);
 		
-		about = new JButton("About TimeRecorder");
+		about = new JButton("3. About TimeRecorder");
 		about.setBounds(dButOrig[0], dButOrig[1] + (dButSpacing[1] * 2), dButScale[0], dButScale[1]);
 		about.addActionListener(this);
 		
@@ -85,7 +86,15 @@ public class StartPanelButtons extends JPanel implements ActionListener, TRCompo
 
 	@Override
 	public void keyReleased(int kCode) {
-		// TODO Auto-generated method stub
+		
+		switch(kCode)
+		{
+		case KeyEvent.VK_1:
+			RecorderMain.changeToDatePanels(RecorderMain.OPEN_ROSTER);
+			break;
+		case KeyEvent.VK_2:
+			RecorderMain.changeToDatePanels(RecorderMain.OPEN_TEAM);
+		}
 		
 	}
 }
