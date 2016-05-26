@@ -1,11 +1,13 @@
 package com.rawls.gui;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class TeamButtonPanel extends JPanel {
+public class TeamButtonPanel extends JPanel implements ActionListener{
 
 	private JButton[] buttons = new JButton[9];
 	private String[] butLabels = {"Add Swimmer", "Edit Swimmer", "RemoveSwimmer", "Save", "Save As", "Create Timesheet", "Chart Performance (Upcoming)", "Create Bookmarks (Upcoming)", "Exit"};
@@ -41,6 +43,12 @@ public class TeamButtonPanel extends JPanel {
 		//Set Buttons to unimplemented functions as off
 		buttons[6].setEnabled(false);
 		buttons[7].setEnabled(false);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
