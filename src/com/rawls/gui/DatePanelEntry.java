@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 import com.rawls.main.RecorderMain;
 
-public class DatePanelEntry extends JPanel implements ActionListener {
+public class DatePanelEntry extends JPanel implements ActionListener, TRComponent {
 	
 	private JButton go;
 	private JTextField[] fields = new JTextField[3];
@@ -166,6 +166,24 @@ public class DatePanelEntry extends JPanel implements ActionListener {
 			RecorderMain.changeDate(date);
 			RecorderMain.changeToTeamView();
 		}
+		
+	}
+
+	@Override
+	public void keyTyped(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(int kCode) {
+		// TODO Auto-generated method stub
 		
 	}
 

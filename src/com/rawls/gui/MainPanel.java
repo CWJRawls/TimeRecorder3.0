@@ -15,13 +15,30 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 import com.rawls.data.Swimmer;
 
-public class MainPanel extends JPanel implements ActionListener{
+public class MainPanel extends JPanel implements ActionListener, TRComponent{
+	
+	//constants
+	public static final int COMP_START = 0; //starting screen
+	public static final int COMP_DATE = 1; //date entry screen
+	public static final int COMP_TEAM = 2; //team view screen
+	public static final int COMP_SWIMMER = 3; //Swimmer screen with list of records
+	public static final int COMP_SWIM_RECORD = 4; //swimmer screen on left, record edit on right
 	
 	//Component Size Objects
 	private Dimension dim;
 	
 	//Containers
 	private JSplitPane jsp;
+	
+	//Panels to use
+	StartPanelLogo spl;
+	StartPanelButtons spb;
+	DatePanel dp;
+	DatePanelEntry dpe;
+	
+	
+	//Status Tracker
+	private int currentComp = COMP_START;
 	
 	public MainPanel()
 	{
@@ -32,8 +49,10 @@ public class MainPanel extends JPanel implements ActionListener{
 		
 		jsp = new JSplitPane();
 		jsp.setDividerLocation(0.5);
-		jsp.setLeftComponent(new StartPanelLogo());
-		jsp.setRightComponent(new StartPanelButtons());
+		spl = new StartPanelLogo();
+		jsp.setLeftComponent(spl);
+		spb = new StartPanelButtons();
+		jsp.setRightComponent(spb);
 		jsp.setBounds(0, 0, this.getWidth(), this.getHeight());
 		jsp.setDividerSize(10);
 		jsp.setUI(new BasicSplitPaneUI() {
@@ -58,8 +77,10 @@ public class MainPanel extends JPanel implements ActionListener{
 
 	public void switchToDateView()
 	{	
-		jsp.setRightComponent(new DatePanel());
-		jsp.setLeftComponent(new DatePanelEntry());
+		dp = new DatePanel();
+		dpe = new DatePanelEntry();
+		jsp.setRightComponent(dp);
+		jsp.setLeftComponent(dp);
 		this.revalidate();
 		this.repaint();
 	}
@@ -82,6 +103,92 @@ public class MainPanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		/* Why Did I do This? */
+	}
+
+	@Override
+	public void keyTyped(int kCode) {
+		
+		switch(currentComp)
+		{
+		case COMP_START:
+			spl.keyTyped(kCode);
+			spb.keyTyped(kCode);
+			break;
+		case COMP_DATE:
+			dp.keyTyped(kCode);
+			dpe.keyTyped(kCode);
+			break;
+		case COMP_TEAM:
+			spl.keyTyped(kCode);
+			spb.keyTyped(kCode);
+			break;
+		case COMP_SWIMMER:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		case COMP_SWIM_RECORD:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		}
+	}
+
+	@Override
+	public void keyPressed(int kCode) {
+		
+		switch(currentComp)
+		{
+		case COMP_START:
+			spl.keyPressed(kCode);
+			spb.keyPressed(kCode);
+			break;
+		case COMP_DATE:
+			dp.keyPressed(kCode);
+			dpe.keyPressed(kCode);
+			break;
+		case COMP_TEAM:
+			spl.keyPressed(kCode);
+			spb.keyPressed(kCode);
+			break;
+		case COMP_SWIMMER:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		case COMP_SWIM_RECORD:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(int kCode) {
+		
+		switch(currentComp)
+		{
+		case COMP_START:
+			spl.keyReleased(kCode);
+			spb.keyReleased(kCode);
+			break;
+		case COMP_DATE:
+			dp.keyReleased(kCode);
+			dpe.keyReleased(kCode);
+			break;
+		case COMP_TEAM:
+			spl.keyReleased(kCode);
+			spb.keyReleased(kCode);
+			break;
+		case COMP_SWIMMER:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		case COMP_SWIM_RECORD:
+			//spl.keyTyped(kCode);
+			//spb.keyTyped(kCode);
+			break;
+		}
 		
 	}
 

@@ -6,7 +6,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class DatePanel extends JPanel {
+public class DatePanel extends JPanel implements TRComponent{
 
 	private String[] texts = {"Please Enter", "Date of Meet", "or Time Trials"};
 	private int[] textW;
@@ -105,6 +105,24 @@ public class DatePanel extends JPanel {
 				lSpacing[i] = 0;
 			}
 		}
+	}
+
+	@Override
+	public void keyTyped(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(int kCode) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

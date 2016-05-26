@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class StartPanelLogo extends JPanel{
+public class StartPanelLogo extends JPanel implements TRComponent{
 	
 	private BufferedImage logo = null;
 	private int[] oScale = {600, 600};
@@ -68,6 +68,24 @@ public class StartPanelLogo extends JPanel{
 		g.dispose();
 		
 		return new ImageIcon(bf);
+	}
+
+	@Override
+	public void keyTyped(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(int kCode) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

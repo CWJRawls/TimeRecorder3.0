@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import com.rawls.main.RecorderMain;
 
-public class StartPanelButtons extends JPanel implements ActionListener{
+public class StartPanelButtons extends JPanel implements ActionListener, TRComponent{
 
 	
 	private JButton text, roster, about;
@@ -68,6 +68,24 @@ public class StartPanelButtons extends JPanel implements ActionListener{
 		{
 			RecorderMain.changeToDatePanels(RecorderMain.OPEN_NEW);
 		}
+		
+	}
+
+	@Override
+	public void keyTyped(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(int kCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(int kCode) {
+		// TODO Auto-generated method stub
 		
 	}
 }
