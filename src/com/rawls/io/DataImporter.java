@@ -82,7 +82,7 @@ public class DataImporter {
 					if(in.charAt(i) == ',')
 					{
 						last = parts[0].substring(0, i);
-						first = parts[0].substring(i + 2);
+						first = parts[0].substring(i + 1);
 					}
 				}
 				
@@ -112,11 +112,8 @@ public class DataImporter {
 			return false;
 		}
 		
+		SwimmerMasterList.sort();
 		return true;
-		
-		//RecorderMain.getDateandFile();
-		
-		
 		
 	}
 

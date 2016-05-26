@@ -80,7 +80,7 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 		dp = new DatePanel();
 		dpe = new DatePanelEntry();
 		jsp.setRightComponent(dp);
-		jsp.setLeftComponent(dp);
+		jsp.setLeftComponent(dpe);
 		this.revalidate();
 		this.repaint();
 	}
@@ -88,6 +88,8 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 	public void switchToTeamView()
 	{
 		jsp.setRightComponent(new TeamListPanel());
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void switchToSwimmerView(Swimmer s)

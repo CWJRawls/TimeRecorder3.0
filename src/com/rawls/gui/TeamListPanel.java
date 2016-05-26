@@ -1,12 +1,17 @@
 package com.rawls.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.Calendar;
 
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import com.rawls.storage.SwimmerMasterList;
 
 public class TeamListPanel extends JPanel implements TRComponent{
 	
@@ -21,24 +26,15 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	
 	public TeamListPanel()
 	{
-		//get the size of the component
-		Dimension d = WindowReference.getDimension();
-		Dimension curr = new Dimension(d.width / 2, d.height);
+		this.setLayout(new GridLayout(1, 1));
 		
-		//set the size of the component
-		this.setPreferredSize(curr);
+		teamList = new JList<String>(SwimmerMasterList.getListDisplay());
 		
-		teamList = new JList<String>();
+		JScrollPane listPane = new JScrollPane(teamList);
 		
-		int leftSpace = (int)((curr.width * 0.1) / 2.0);
-		int topSpace = (int)((curr.height * 0.1) / 2.0);
-		int lWidth = (int)(curr.width * 0.9);
-		int lHeight = (int)(curr.height * 0.9);
+		this.add(listPane);
 		
-		teamList.setBounds(leftSpace, topSpace, lWidth, lHeight);
-		
-		this.add(teamList);
-
+		this.setPreferredSize(new Dimension(WindowReference.getDimension().width / 2, WindowReference.getDimension().height));
 	}
 	
 	public int getSelectedIndex()

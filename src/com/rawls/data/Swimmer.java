@@ -269,14 +269,14 @@ public class Swimmer implements Serializable, Comparable<Swimmer>{
 	@Override
 	public int compareTo(Swimmer o) {
 		
-		if (o.getAge() < age) {
+		/*if (o.getAge() < age) {
 			return 1;
 		}
 		else if (o.getAge() > age)
 		{
 			return -1;
 		}
-		else {
+		else {*/
 			if(o.getLName().compareToIgnoreCase(lName) < 0)
 			{
 				return 1;
@@ -300,7 +300,7 @@ public class Swimmer implements Serializable, Comparable<Swimmer>{
 					return 0;
 				}
 			}
-		}
+		//}
 	}
 
 }
