@@ -138,4 +138,9 @@ public class SwimmerMasterList {
 		}
 	}
 	
+	public static int size()
+	{
+		return swimmerList.size();
+	}
+	
 }

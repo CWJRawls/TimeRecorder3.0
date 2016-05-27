@@ -48,6 +48,8 @@ public class RecorderMain {
 	
 	private static String date = "01/01/1970";
 	
+	private static int[] datePieces = {1,1,1970};
+	
 	public static int open_method = OPEN_NEW;
 	
 	//Controls on where to save the team file
@@ -99,6 +101,19 @@ public class RecorderMain {
 	public static void changeDate(String d)
 	{
 		date = d;
+		String[] parts = date.split("/");
+		
+		try{
+			for(int i = 0; i < parts.length && i < datePieces.length; i++)
+			{
+				datePieces[i] = Integer.parseInt(parts[i]);
+			}
+		}catch(Exception e)
+		{
+			datePieces[0] = 1;
+			datePieces[1] = 1;
+			datePieces[2] = 1970;
+		}
 	}
 	
 	public static void changeToTeamView()
@@ -153,11 +168,20 @@ public class RecorderMain {
 		}
 	}
 	
-	public static void SwitchToAddSwimmer()
+	public static void switchToAddSwimmer()
 	{
 		mf.SwitchToAddSwimmer();
 	}
 	
+	public static void viewSwimmer(Swimmer s)
+	{
+		mf.switchToSwimmer(s);
+	}
+	
+	public static int[] getDate()
+	{
+		return datePieces;
+	}
 	
 	
 	

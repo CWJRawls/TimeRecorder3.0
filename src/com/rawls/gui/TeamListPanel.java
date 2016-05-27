@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.util.Calendar;
+import java.util.Vector;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,8 +28,15 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	public TeamListPanel()
 	{
 		this.setLayout(new GridLayout(1, 1));
+		Vector<String> names = SwimmerMasterList.getListDisplay();
 		
-		teamList = new JList<String>(SwimmerMasterList.getListDisplay());
+		for(int i = 0; i < names.size(); i++)
+		{
+			String index = (i + 1) + ". ";
+			names.set(i, index + names.get(i));
+		}
+		
+		teamList = new JList<String>(names);
 		teamList.setSelectedIndex(0);
 		
 		JScrollPane listPane = new JScrollPane(teamList);
