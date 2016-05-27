@@ -140,6 +140,15 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 			JOptionPane.showMessageDialog(this, "Could Not Find Swimmer: " + result);
 		}
 	}
+	
+	private void openSwimmer()
+	{
+		int s = tlp.getSelectedIndex();
+		
+		Swimmer swim = SwimmerMasterList.getSwimmer(s);
+		
+		RecorderMain.viewSwimmer(swim);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -154,6 +163,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 			RecorderMain.switchToAddSwimmer();
 			break;
 		case 1: //Edit Swimmer
+			openSwimmer();
 			break;
 		case 2: //Find Swimmer Number
 			findSwimmerByNumber();

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -13,10 +14,19 @@ import com.rawls.data.Record;
 
 public class SwimmerInfoPanel extends JPanel implements ActionListener{
 	
+	public static final int MODE_INFO = 0;
+	public static final int MODE_RECORD = 1;
+	
+	private int dispMode = MODE_INFO;
+	
 	private RecordListPanel rlp;
 	private JButton[] swimmerOptions = new JButton[5];
 	private String[] sOptText = {"Add Time", "Edit Time", "Remove Time", "Change Swimmers", "Close Swimmer"};
 	private JTextField[] sDetails = new JTextField[3];
+	private JLabel[] infoLabel = new JLabel[3];
+	private String[] infoText = {"First Name", "Last Name", "Age"};
+	private JLabel butLabel;
+	private String butText = "Options";
 	
 	private JComboBox<String>[] menus = new JComboBox[2];
 	private String[] strokes = {"Freestyle", "Backstroke", "Breaststroke", "Butterfly"};
@@ -49,6 +59,31 @@ public class SwimmerInfoPanel extends JPanel implements ActionListener{
 		this.add(sDetails[0]);
 		this.add(sDetails[1]);
 		this.add(sDetails[2]);
+		
+		for(int i = 0; i < infoLabel.length; i++)
+		{
+			infoLabel[i] = new JLabel(infoText[i]);
+			infoLabel[i].setBounds((int)(sDetails[i].getBounds().x + (curr.width * 0.01)), (int)(sDetails[i].getBounds().y - (curr.height * 0.05)), sDetails[i].getBounds().width, sDetails[i].getBounds().height);
+			this.add(infoLabel[i]);
+		}
+		
+		int soWidth = (int)(curr.width * 0.4);
+		int soLeft = (int)(curr.width * 0.3);
+		int soTop = (int)(curr.height * 0.3);
+		int soHeight = (int)(curr.height * 0.075);
+		int soBlock = (int)(curr.height * 0.09);
+		
+		for(int i = 0; i < swimmerOptions.length; i++)
+		{
+			swimmerOptions[i] = new JButton(sOptText[i]);
+			swimmerOptions[i].addActionListener(this);
+			swimmerOptions[i].setBounds(soLeft, soTop + (i * soBlock), soWidth, soHeight);
+			this.add(swimmerOptions[i]);
+		}
+		
+		butLabel = new JLabel(butText);
+		butLabel.setBounds((int)(swimmerOptions[0].getBounds().x + (curr.width * 0.15)), (int)(swimmerOptions[0].getBounds().y - (curr.height * 0.075)), swimmerOptions[0].getBounds().width, swimmerOptions[0].getBounds().height);
+		this.add(butLabel);
 		
 		/*-------------------------------*/
 		
@@ -142,7 +177,28 @@ public class SwimmerInfoPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		if(dispMode == MODE_INFO)
+		{
+			int but = -1;
+			
+			for(but = 0; but < swimmerOptions.length && !e.getSource().equals(swimmerOptions[but]); but++){}
+			
+			switch(but)
+			{
+			case 0:
+				addRecord();
+				break;
+			case 1:
+				editRecord(rlp.getSwimmer().getRecord(rlp.getSelectedIndex()));
+				break;
+			case 2:
+			}
+		}
+		else if(dispMode == MODE_RECORD)
+		{
+			
+		}
 		
 	}
 
