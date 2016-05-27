@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.rawls.main.RecorderMain;
+
 public class TeamButtonPanel extends JPanel implements ActionListener{
 
 	private JButton[] buttons = new JButton[9];
@@ -37,6 +39,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		{
 			buttons[i] = new JButton(butLabels[i]);
 			buttons[i].setBounds(leftSpace, topSpace + (i * bSpace) + (i * bHeight), bWidth, bHeight);
+			buttons[i].addActionListener(this);
 			this.add(buttons[i]);
 		}
 		
@@ -48,7 +51,34 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		int but = -1;
+		
+		for(but = 0; but < buttons.length && !e.getSource().equals(buttons[but]); but++){}
+		
+		switch(but)
+		{
+		case 0:
+			RecorderMain.SwitchToAddSwimmer();
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		case 8:
+			break;
+		}
+
 		
 	}
 }

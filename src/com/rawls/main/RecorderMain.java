@@ -153,6 +153,11 @@ public class RecorderMain {
 		}
 	}
 	
+	public static void SwitchToAddSwimmer()
+	{
+		mf.SwitchToAddSwimmer();
+	}
+	
 	
 	
 	

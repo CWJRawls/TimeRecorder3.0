@@ -36,6 +36,11 @@ public class MainFrame extends JFrame implements KeyListener{
 	{
 		mp.switchToTeamView();
 	}
+	
+	public void SwitchToAddSwimmer()
+	{
+		mp.SwitchToAddSwimmer();
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {

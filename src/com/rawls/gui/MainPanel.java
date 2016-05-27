@@ -102,6 +102,14 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 		
 	}
 	
+	public void SwitchToAddSwimmer()
+	{
+		jsp.setRightComponent(new AddLabelPanel());
+		jsp.setLeftComponent(new AddSwimmerPanel());
+		this.revalidate();
+		this.repaint();
+	}
+	
 	public void switchToStartingView()
 	{
 		
