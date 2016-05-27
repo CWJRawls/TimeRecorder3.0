@@ -52,6 +52,7 @@ public class RecordListPanel extends JPanel {
 	public void updateList()
 	{
 		recordList.setListData(s.getRecordList());
+		recordList.setSelectedIndex(0);
 	}
 	
 	public Swimmer getSwimmer()
