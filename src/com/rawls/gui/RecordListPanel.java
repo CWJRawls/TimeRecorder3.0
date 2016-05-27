@@ -19,6 +19,7 @@ public class RecordListPanel extends JPanel {
 	
 	public RecordListPanel(Swimmer s)
 	{
+		this.s = s;
 		Vector<String> records = s.getRecordList();
 		
 		recordList = new JList<String>(records);
@@ -51,6 +52,11 @@ public class RecordListPanel extends JPanel {
 	public void updateList()
 	{
 		recordList.setListData(s.getRecordList());
+	}
+	
+	public Swimmer getSwimmer()
+	{
+		return s;
 	}
 	
 }

@@ -28,7 +28,7 @@ public class Record implements Serializable, Comparable<Record> {
 	
 	public Record()
 	{
-		event = "?";
+		event = "25 Freestyle";
 		mins = -1;
 		sec = -1;
 		mili  = -1;

@@ -100,7 +100,7 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 	public void switchToSwimmerView(Swimmer s)
 	{
 		RecordListPanel rlp = new RecordListPanel(s);
-		//create and add SwimmerInfoPanel to the left component
+		jsp.setLeftComponent(new SwimmerInfoPanel(rlp));
 		jsp.setRightComponent(rlp);
 		this.revalidate();
 		this.repaint();
