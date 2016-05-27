@@ -3,12 +3,15 @@ package com.rawls.gui;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.rawls.data.Swimmer;
+import com.rawls.io.DataExporter;
 import com.rawls.main.RecorderMain;
 import com.rawls.storage.SwimmerMasterList;
 
@@ -75,7 +78,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		else if(result == JOptionPane.NO_OPTION)
 		{
 			//Attempt to save
-			System.out.println("Attempting To Save!");
+			save();
 			//Then Exit
 			System.exit(0);
 		}
@@ -149,6 +152,51 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		
 		RecorderMain.viewSwimmer(swim);
 	}
+	
+	private void save()
+	{
+		if(RecorderMain.file_save_set)
+			DataExporter.exportToXML(new File(RecorderMain.file_path));
+		else
+		{
+			JOptionPane.showMessageDialog(this, "No Save Location Set, switching to Save As");
+			saveAs();
+		}
+	}
+	
+	private void saveAs()
+	{
+		JFileChooser choose = new JFileChooser();
+			
+		int result = choose.showSaveDialog(this);
+		
+		if(result == JFileChooser.APPROVE_OPTION)
+		{
+			File xml = choose.getSelectedFile();
+			
+			String path = xml.getPath();
+			
+			if(!path.substring(path.length() - 4).equals(".xml"))
+			{
+				path += ".xml";
+				xml = new File(path);
+			}
+			
+			DataExporter.exportToXML(xml);
+		}
+	}
+	
+	private void exportTimeSheet()
+	{
+		JFileChooser choose = new JFileChooser();
+		
+		int result = choose.showSaveDialog(this);
+		
+		if(result == JFileChooser.APPROVE_OPTION)
+		{
+			DataExporter.exportTimeSheet(choose.getSelectedFile());
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -175,10 +223,19 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 			attemptToRemoveSwimmer();
 			break;
 		case 5: //Save
+			if(RecorderMain.file_save_set)
+				DataExporter.exportToXML(new File(RecorderMain.file_path));
+			else
+			{
+				JOptionPane.showMessageDialog(this, "No Save Location Set, switching to Save As");
+				saveAs();
+			}
 			break;
 		case 6: //Save As
+			saveAs();
 			break;
 		case 7: //Timesheet
+			exportTimeSheet();
 			break;
 		case 8: //chart
 			break;

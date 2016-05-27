@@ -14,6 +14,7 @@ import java.util.Vector;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Source;
+import javax.swing.JOptionPane;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.sax.SAXResult;
@@ -55,6 +56,7 @@ public class DataExporter {
 			if(!swimmers.get(i).hasRecords())
 			{
 				swimmers.get(i).addRecord(new Record());
+				swimmers.get(i).getRecord(0).setEvent("?");
 			}
 		}
 		
@@ -69,6 +71,8 @@ public class DataExporter {
 			RecorderMain.updateStatus("Database XML File Written");
 			
 		} catch (IOException e) {
+			
+			JOptionPane.showMessageDialog(null, "File Write Error! Data Not Written");
 			RecorderMain.updateStatus("File Write Error, data not written");
 		}
 		
