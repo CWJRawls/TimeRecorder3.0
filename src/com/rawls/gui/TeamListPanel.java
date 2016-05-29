@@ -53,7 +53,15 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	
 	public void updateList()
 	{
-		teamList.setListData(SwimmerMasterList.getListDisplay());
+		
+		Vector<String> nList = SwimmerMasterList.getListDisplay();
+		
+		for(int i = 0; i < nList.size(); i++)
+		{
+			nList.set(i, (i + 1) + ". " + nList.get(i));
+		}
+		
+		teamList.setListData(nList);
 	}
 	
 	private boolean isContinuous(int s, int ms)
