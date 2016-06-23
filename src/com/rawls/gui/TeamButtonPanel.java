@@ -50,7 +50,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		}
 		
 		//Set Buttons to unimplemented functions as off
-		buttons[8].setEnabled(false);
+		//buttons[8].setEnabled(false);
 		buttons[9].setEnabled(false);
 		
 	}
@@ -238,6 +238,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 			exportTimeSheet();
 			break;
 		case 8: //chart
+			ChartFrame cf = new ChartFrame();
 			break;
 		case 9: //bookmarks
 			break;

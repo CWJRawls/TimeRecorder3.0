@@ -44,7 +44,7 @@ public class StartPanelButtons extends JPanel implements ActionListener, TRCompo
 		roster.setBounds(dButOrig[0], dButOrig[1] + dButSpacing[1], dButScale[0], dButScale[1]);
 		roster.addActionListener(this);
 		
-		about = new JButton("About TimeRecorder");
+		about = new JButton("New Team Without a Roster");
 		about.setBounds(dButOrig[0], dButOrig[1] + (dButSpacing[1] * 2), dButScale[0], dButScale[1]);
 		about.addActionListener(this);
 		

@@ -31,6 +31,61 @@ public class SwimmerMasterList {
 		return swimmerList.get(index);
 	}
 	
+	
+	//for retrieval by whole name
+	public static Swimmer getSwimmer(String name)
+	{
+		int size = swimmerList.size();
+		if(size > 1000)
+		{
+			System.out.println("Current Search Size:" + size);
+			if(size == 0)
+			{
+				return new Swimmer();
+			}
+		
+			int i = size / 2;
+			size /= 2;
+			
+			while(swimmerList.get(i).getDisplayName().equals(name) && size != 0)
+			{
+				System.out.println("Current Search Size:" + size + " i = " + i);
+				int a = name.compareTo(swimmerList.get(i).getDisplayName());
+				if(a > 0)
+				{
+					i += size;
+				}
+				else if(a < 0)
+				{
+					i -= size;
+				}
+			
+				size /= 2;
+			}
+			
+			if(swimmerList.get(i).getDisplayName().equals(name))
+			{
+				return swimmerList.get(i);
+			}
+			else
+			{
+				return new Swimmer();
+			}
+		}
+		else
+		{
+			for(int i = 0; i < swimmerList.size(); i++)
+			{
+				if(swimmerList.get(i).getDisplayName().equalsIgnoreCase(name))
+				{
+					return swimmerList.get(i);
+				}
+			}
+				
+			return new Swimmer();
+		}
+	}
+	
 	private static void sortAndAssignIDs()
 	{
 		Swimmer[] temp = new Swimmer[swimmerList.size()];
