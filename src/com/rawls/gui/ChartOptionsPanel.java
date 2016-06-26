@@ -128,6 +128,7 @@ public class ChartOptionsPanel extends JPanel implements ActionListener{
 		return jsp;
 	}
 	
+	//private   Complete Me?
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
