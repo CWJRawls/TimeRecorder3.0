@@ -266,6 +266,11 @@ public class Swimmer implements Serializable, Comparable<Swimmer>{
 		return out;
 	}
 	
+	public int getNumRecords()
+	{
+		return records.size();
+	}
+	
 	@Override
 	public int compareTo(Swimmer o) {
 		

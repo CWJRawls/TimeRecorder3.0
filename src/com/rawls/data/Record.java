@@ -80,7 +80,7 @@ public class Record implements Serializable, Comparable<Record> {
 	
 	public String toString()
 	{
-		return event + "\t" + getTime() + " " + getDate();
+		return event + " \t" + getTime() + " " + getDate();
 	}
 	
 	public String toStringExport()

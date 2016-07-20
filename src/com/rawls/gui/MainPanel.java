@@ -124,6 +124,13 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 		// TODO Auto-generated method stub
 		/* Why Did I do This? */
 	}
+	
+	public void switchToChangeDate()
+	{
+		jsp.setRightComponent(new DatePanelEntry());
+		this.revalidate();
+		this.repaint();
+	}
 
 	@Override
 	public void keyTyped(int kCode) {

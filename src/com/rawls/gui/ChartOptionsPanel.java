@@ -8,15 +8,17 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
+import com.rawls.data.ChartElement;
 import com.rawls.storage.SwimmerMasterList;
 
 public class ChartOptionsPanel extends JPanel implements ActionListener{
 
-	private boolean arrangeBy = false;
+	private boolean arrangeBy = false; //True - by event | False - by swimmer
 	
 	private String[] event_list = {"25 Freestyle","25 Backstroke","25 Breaststroke","25 Butterfly","50 Freestyle","50 Backstroke",
 			"50 Breaststroke","50 Butterfly","100 Freestyle","100 Backstroke","100 Breaststroke","100 Butterfly","100 IM","200 IM"};
@@ -31,6 +33,10 @@ public class ChartOptionsPanel extends JPanel implements ActionListener{
 	private JCheckBox[] events = new JCheckBox[14];
 	private JScrollPane checkPane;
 	private JButton mode_but;
+	private JButton[] colors;
+	private JLabel[] color_but_labels;
+	private JLabel[] chart_labels;
+	private ChartElement[] dataPoints;
 	
 	public ChartOptionsPanel()
 	{
@@ -107,7 +113,7 @@ public class ChartOptionsPanel extends JPanel implements ActionListener{
 		}
 		
 		swimmers[0].addActionListener(this);
-		
+		swimmers[1].setSelected(true);
 		return jsp;
 	}
 
@@ -125,10 +131,38 @@ public class ChartOptionsPanel extends JPanel implements ActionListener{
 			jsp.add(events[i]);
 		}
 		
+		events[0].setSelected(true);
+		
 		return jsp;
 	}
 	
-	//private   Complete Me?
+	private JScrollPane createColorPanel()
+	{
+		JScrollPane jsp = new JScrollPane();
+		jsp.setLayout(null);
+		jsp.setPreferredSize(new Dimension(477, 450));
+		
+		int num_charts = 0;
+		
+		if(arrangeBy) //if the charts are split by swimmer
+		{
+			if(swimmers[0].isSelected()) //if the whole team option is selected
+			{
+				num_charts = 1;
+			}
+			else
+			{
+				
+			}
+		}
+		else //if the charts are split by event
+		{
+			
+		}
+		//create and add buttons/labels
+		
+		return jsp;
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

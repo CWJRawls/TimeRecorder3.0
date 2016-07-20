@@ -17,8 +17,8 @@ import com.rawls.storage.SwimmerMasterList;
 
 public class TeamButtonPanel extends JPanel implements ActionListener{
 
-	private JButton[] buttons = new JButton[11];
-	private String[] butLabels = {"Add Swimmer", "Edit Swimmer", "Find Swimmer By Number", "Find Swimmer By Name", "Remove Swimmer", "Save", "Save As", "Create Timesheet", "Chart Performance (Upcoming)", "Create Bookmarks (Upcoming)", "Exit"};
+	private JButton[] buttons = new JButton[12];
+	private String[] butLabels = {"Add Swimmer", "Edit Swimmer", "Find Swimmer By Number", "Find Swimmer By Name", "Remove Swimmer", "Save", "Save As", "Create Timesheet", "Change Date", "Chart Performance (Upcoming)", "Create Bookmarks", "Exit"};
 	
 	private TeamListPanel tlp;
 	
@@ -36,10 +36,10 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		this.setPreferredSize(curr);
 		
 		int bWidth = (int)(curr.width * 0.75);
-		int bHeight = (int)(curr.height * 0.07);
+		int bHeight = (int)(curr.height * 0.065);
 		int bSpace = (int)(curr.height * 0.01);
 		int leftSpace = (int)((curr.width * 0.25) / 2.0);
-		int topSpace = (int)((curr.height * 0.1) / 2.0);
+		int topSpace = (int)((curr.height * 0.06) / 2.0);
 		
 		for(int i = 0; i < buttons.length; i++)
 		{
@@ -237,12 +237,17 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		case 7: //Timesheet
 			exportTimeSheet();
 			break;
-		case 8: //chart
+		case 8:
+			//change the date
+			RecorderMain.switchToChangeDate();
+			break;
+		case 9: //chart
 			ChartFrame cf = new ChartFrame();
 			break;
-		case 9: //bookmarks
+		case 10: //bookmarks
+			BookmarkFrame bf = new BookmarkFrame();
 			break;
-		case 10: //exit
+		case 11: //exit
 			attemptClose();
 			break;
 		}

@@ -1,9 +1,13 @@
 package com.rawls.main;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -67,6 +71,22 @@ public class RecorderMain {
 		printStartingOptions();
 		startingOptions();
 		*/
+		
+		File bPath;
+		
+		if(System.getProperty("os.name").toLowerCase().contains("mac"))
+			bPath = new File("./Bookmarks");
+		else if(System.getProperty("os.name").toLowerCase().contains("windows"))
+			bPath = new File(".\\Bookmarks");
+		else //linux
+			bPath = new File("./Bookmarks");
+		
+		Path path = bPath.toPath();
+		
+		if(!Files.exists(path, LinkOption.NOFOLLOW_LINKS))
+		{
+			bPath.mkdirs();
+		}
 		
 		mf = new MainFrame("TimeRecorder");
 		
@@ -183,7 +203,10 @@ public class RecorderMain {
 		return datePieces;
 	}
 	
-	
+	public static void switchToChangeDate()
+	{
+		mf.switchToChangeDate();
+	}
 	
 	
 	

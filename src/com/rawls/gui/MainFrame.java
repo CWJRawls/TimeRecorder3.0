@@ -48,6 +48,11 @@ public class MainFrame extends JFrame implements KeyListener{
 	{
 		mp.switchToSwimmerView(s);
 	}
+	
+	public void switchToChangeDate()
+	{
+		mp.switchToChangeDate();
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
