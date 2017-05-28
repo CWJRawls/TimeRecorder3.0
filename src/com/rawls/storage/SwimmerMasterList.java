@@ -35,55 +35,21 @@ public class SwimmerMasterList {
 	//for retrieval by whole name
 	public static Swimmer getSwimmer(String name)
 	{
-		int size = swimmerList.size();
-		if(size > 1000)
-		{
-			System.out.println("Current Search Size:" + size);
-			if(size == 0)
-			{
-				return new Swimmer();
-			}
-		
-			int i = size / 2;
-			size /= 2;
-			
-			while(swimmerList.get(i).getDisplayName().equals(name) && size != 0)
-			{
-				System.out.println("Current Search Size:" + size + " i = " + i);
-				int a = name.compareTo(swimmerList.get(i).getDisplayName());
-				if(a > 0)
-				{
-					i += size;
-				}
-				else if(a < 0)
-				{
-					i -= size;
-				}
-			
-				size /= 2;
-			}
-			
-			if(swimmerList.get(i).getDisplayName().equals(name))
-			{
-				return swimmerList.get(i);
-			}
-			else
-			{
-				return new Swimmer();
-			}
-		}
-		else
+		if(swimmerList.size() > 0)
 		{
 			for(int i = 0; i < swimmerList.size(); i++)
 			{
-				if(swimmerList.get(i).getDisplayName().equalsIgnoreCase(name))
+				
+				if(swimmerList.get(i).getFormattedName().equalsIgnoreCase(name))
 				{
 					return swimmerList.get(i);
 				}
 			}
-				
-			return new Swimmer();
 		}
+		else
+			System.out.println("List Size of 0?");
+		
+		return new Swimmer();
 	}
 	
 	private static void sortAndAssignIDs()

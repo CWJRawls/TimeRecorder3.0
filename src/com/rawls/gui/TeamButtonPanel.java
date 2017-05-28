@@ -9,16 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.rawls.data.Swimmer;
 import com.rawls.io.DataExporter;
+import com.rawls.io.DataImporter;
 import com.rawls.main.RecorderMain;
 import com.rawls.storage.SwimmerMasterList;
 
 public class TeamButtonPanel extends JPanel implements ActionListener{
 
 	private JButton[] buttons = new JButton[12];
-	private String[] butLabels = {"Add Swimmer", "Edit Swimmer", "Find Swimmer By Number", "Find Swimmer By Name", "Remove Swimmer", "Save", "Save As", "Create Timesheet", "Change Date", "Chart Performance (Upcoming)", "Create Bookmarks", "Exit"};
+	private String[] butLabels = {"Add Swimmer", "Edit Swimmer", "Find Swimmer By Number", "Find Swimmer By Name", "Remove Swimmer", "Save", "Save As", "Create Timesheet", "Change Date", "Import Times From CSV File", "Create Bookmarks", "Exit"};
 	
 	private TeamListPanel tlp;
 	
@@ -51,7 +54,7 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 		
 		//Set Buttons to unimplemented functions as off
 		//buttons[8].setEnabled(false);
-		buttons[9].setEnabled(false);
+		//buttons[9].setEnabled(false);
 		
 	}
 	
@@ -241,8 +244,17 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 			//change the date
 			RecorderMain.switchToChangeDate();
 			break;
-		case 9: //chart
-			ChartFrame cf = new ChartFrame();
+		case 9: //import from csv
+			JFileChooser jfc = new JFileChooser();
+			jfc.setDialogTitle("Open CSV File");
+			jfc.setFileFilter(new FileNameExtensionFilter("Comma Separated Files", "csv"));
+			int result = jfc.showOpenDialog(null);
+			if(result == JFileChooser.APPROVE_OPTION)
+			{
+				File csvFile = jfc.getSelectedFile();
+				DataImporter.importCSVData(csvFile);
+				RecorderMain.updateSwimmerListPanel();
+			}
 			break;
 		case 10: //bookmarks
 			BookmarkFrame bf = new BookmarkFrame();

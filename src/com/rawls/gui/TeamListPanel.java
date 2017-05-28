@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import java.util.Vector;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,6 +18,8 @@ import com.rawls.storage.SwimmerMasterList;
 public class TeamListPanel extends JPanel implements TRComponent{
 	
 	private JList<String> teamList;
+	private DefaultListModel<String> model = new DefaultListModel<String>();
+	
 	
 	//Variables to track key presses
 	private int dKeySec = Calendar.getInstance().get(Calendar.SECOND);
@@ -27,23 +30,30 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	
 	public TeamListPanel()
 	{
-		this.setLayout(new GridLayout(1, 1));
+		//this.setLayout(new GridLayout(1, 1));
+		this.setPreferredSize(new Dimension(WindowReference.getDimension().width / 2, (int)(WindowReference.getDimension().getHeight() * 0.925)));
 		Vector<String> names = SwimmerMasterList.getListDisplay();
 		
 		for(int i = 0; i < names.size(); i++)
 		{
 			String index = (i + 1) + ". ";
-			names.set(i, index + names.get(i));
+			model.addElement(index + names.get(i));
 		}
 		
-		teamList = new JList<String>(names);
+		teamList = new JList<String>(model);
 		teamList.setSelectedIndex(0);
+		teamList.setVisibleRowCount(30);
+		
 		
 		JScrollPane listPane = new JScrollPane(teamList);
 		
 		this.add(listPane);
+		listPane.setPreferredSize(new Dimension(WindowReference.getDimension().width / 2, (int)(WindowReference.getDimension().getHeight() * 0.925)));
+		//listPane.revalidate();
+	
+
 		
-		this.setPreferredSize(new Dimension(WindowReference.getDimension().width / 2, WindowReference.getDimension().height));
+		System.out.println("List Width: " + listPane.getWidth() + " | List Height: " + listPane.getHeight());
 	}
 	
 	public int getSelectedIndex()
@@ -54,14 +64,24 @@ public class TeamListPanel extends JPanel implements TRComponent{
 	public void updateList()
 	{
 		
+		System.out.println("updating displayed list");
+		
+		model.removeAllElements();
+		
 		Vector<String> nList = SwimmerMasterList.getListDisplay();
 		
 		for(int i = 0; i < nList.size(); i++)
 		{
-			nList.set(i, (i + 1) + ". " + nList.get(i));
+			String element = (i + 1) + ". " + nList.get(i);
+			model.addElement(element);
 		}
 		
-		teamList.setListData(nList);
+		
+		
+		//teamList.setListData(nList);
+		
+		//teamList.setVisible(false);
+		//teamList.setVisible(true);
 	}
 	
 	private boolean isContinuous(int s, int ms)

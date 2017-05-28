@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.util.ArrayList;
 
@@ -141,6 +142,11 @@ public class RecorderMain {
 		mf.switchToTeamPanel();
 	}
 	
+	public static void updateSwimmerListPanel()
+	{
+		mf.updateSwimmerListPanel();
+	}
+	
 	
 	private static boolean openFromRoster()
 	{
@@ -163,6 +169,9 @@ public class RecorderMain {
 	private static boolean openFromXML()
 	{
 		JFileChooser jop = new JFileChooser();
+		
+		jop.setDialogTitle("Open Existing Team");
+		jop.setFileFilter(new FileNameExtensionFilter("TimeRecorderFiles", "xml"));
 		
 		int result = jop.showOpenDialog(null);
 		

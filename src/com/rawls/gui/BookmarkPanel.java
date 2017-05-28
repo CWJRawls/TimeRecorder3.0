@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
@@ -290,8 +291,10 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 		prevPanel.add(prevB);
 		
 		prevNum = new JLabel("0/0");
-		prevNum.setBounds(225, 727, 50, 25);
-		prevNum.setFont(new Font(prevNum.getFont().getName(), Font.BOLD, 24));
+		prevNum.setBounds(220, 727, 60, 25);
+		prevNum.setFont(new Font(prevNum.getFont().getName(), Font.BOLD, 12));
+		prevNum.setHorizontalAlignment(SwingConstants.CENTER);
+		prevNum.setVerticalAlignment(SwingConstants.CENTER);
 		
 		prevPanel.add(prevNum);
 	}
@@ -427,6 +430,7 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 			if(bg.hasBookmarks())
 			{
 				bg.saveAsPngs(saveField.getText());
+				bg.createPDF(saveField.getText());
 			}
 		}
 		

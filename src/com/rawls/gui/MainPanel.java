@@ -114,6 +114,16 @@ public class MainPanel extends JPanel implements ActionListener, TRComponent{
 		this.repaint();
 	}
 	
+	public void updateSwimmerListPanel()
+	{
+
+			tlp.updateList();
+	}
+	
+	
+	/*
+	 * This is empty, not sure why, I probably had my reasons for this
+	 */
 	public void switchToStartingView()
 	{
 		

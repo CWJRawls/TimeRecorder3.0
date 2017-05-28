@@ -49,6 +49,11 @@ public class MainFrame extends JFrame implements KeyListener{
 		mp.switchToSwimmerView(s);
 	}
 	
+	public void updateSwimmerListPanel()
+	{
+		mp.updateSwimmerListPanel();
+	}
+	
 	public void switchToChangeDate()
 	{
 		mp.switchToChangeDate();
