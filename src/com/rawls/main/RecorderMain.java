@@ -28,25 +28,7 @@ public class RecorderMain {
 	public static final int OPEN_NEW = 2;
 	
 	private static boolean ready = false;
-	/*
-	private static char select = ' ';
-	
-	private static String defaultPath = ".";
-	
-	private static String startOptions =  "\nOptions:\n1: Load names from roster\n2: Load saved XML data\n?: See options again\nv: Version Number\nx: Exit Program\n";
-	
-	private static String mainOptions = "\nOptions\n1: Add a Swimmer\n2: Edit a Swimmer\n3: Find and Edit a Swimmer by Name\n4: Remove a Swimmer\n5: Change Date\n6: Save\n7: Save As\n8: Export Time Sheet\n9: Export Swimmer Details\n0: Export to XML\nl: Show Swimmer List\nh: Show file type help\n?: Show Options\nx: Exit\n";
-	
-	private static String swimmerOptions = "\nOptions\n1: Edit First Name\n2: Edit Last Name\n3: Add a Record\n4: Edit Record Event\n5: Edit Record Time\n6: Edit Record Date\n7: Remove a Record\n8: Edit age\n?: Show Options\nc: Close Swimmer\nv: Change Swimmer";
-	
-	private static Scanner scan = new Scanner(System.in);
-	
-	private static String defaultDate = "-11/-11/-1111";
-	
-	private static String givenPath = "";
-	
-	private static int optionFlag = -1;
-	*/
+
 	private static String vNum = "v0.3";
 	
 	private static MainFrame mf;
@@ -62,17 +44,7 @@ public class RecorderMain {
 	public static String file_path = "";
 	
 	public static void start() 
-	{	/*
-		updateStatus("");
-		updateStatus("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		updateStatus("Hello and welcome to Time Recorder storage application");
-		updateStatus("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		updateStatus("");
-		
-		printStartingOptions();
-		startingOptions();
-		*/
-		
+	{	
 		File bPath;
 		
 		if(System.getProperty("os.name").toLowerCase().contains("mac"))
@@ -152,6 +124,8 @@ public class RecorderMain {
 	{
 		JFileChooser jop = new JFileChooser();
 		
+		jop.setDialogTitle("Open From Roster");
+		jop.setFileFilter(new FileNameExtensionFilter("Roster Files", "txt"));
 		int result = jop.showOpenDialog(null);
 		
 		if(result == JFileChooser.APPROVE_OPTION)

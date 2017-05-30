@@ -78,7 +78,7 @@ public class DataImporter {
 				System.out.println(in);
 				String first = "";
 				String last = "";
-				int age = 99;
+				int age = 6;
 				
 				String[] parts = in.split("[|]");
 				
@@ -274,7 +274,7 @@ public class DataImporter {
 		//if yes is chosen, create and add the swimmer to the list
 		if(response == JOptionPane.YES_OPTION)
 		{
-			s = new Swimmer(fname, lname);
+			s = new Swimmer(fname, lname,6);
 			SwimmerMasterList.addSwimmer(s);
 			return s;
 		}

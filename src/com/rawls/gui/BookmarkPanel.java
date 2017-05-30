@@ -2,6 +2,7 @@ package com.rawls.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -207,14 +208,18 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 	{
 		String fPath;
 		
-		if(System.getProperty("os.name").toLowerCase().contains("mac"))
-			fPath = "./Bookmarks/Temp.pdf";
-		else if(System.getProperty("os.name").toLowerCase().contains("windows"))
-			fPath  = ".\\Bookmarks\\Temp.pdf";
-		else
-			fPath = "./Bookmarks/Temp.pdf";
+		fPath = "." + /*File.separatorChar +*/ "Bookmarks" + File.separatorChar + "Bookmarks.pdf"; 
+		
+		int endLength = fPath.length(); //get the size of string we are adding to the file path
 		
 		File f = new File(fPath);
+		
+		String path = f.getAbsolutePath(); //get the path
+		
+		String beginPath = path.substring(0, path.length() - endLength); //get everything up to the .
+		String endPath = path.substring(path.length() - (endLength - 1));//evrything after the .
+		
+		f = new File(beginPath + endPath);
 		
 		saveField = new JTextField();
 		saveField.setText(f.getAbsolutePath());
@@ -334,13 +339,25 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 		return true;
 	}
 	
+	public void changeButtonText(final JButton button, final String text)
+	{
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				button.setText(text);
+			}
+		});
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource().equals(previewBut))
 		{
-			//generate bookmarks
+			previewBut.setEnabled(false);
+			previewBut.setText("Working");
+
+
 			Font b = new Font(fontBStyleBox.getItemAt(fontBStyleBox.getSelectedIndex()), Font.BOLD, Integer.parseInt(fontBSizeBox.getItemAt(fontBSizeBox.getSelectedIndex())));
 			Font h = new Font(fontHStyleBox.getItemAt(fontHStyleBox.getSelectedIndex()), Font.BOLD, Integer.parseInt(fontHSizeBox.getItemAt(fontHSizeBox.getSelectedIndex())));
 			bg = new BookmarkGenerator(h, b, headerImage, headerField.getText());
@@ -349,6 +366,10 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 			currentPrevLab.setIcon(scalePreview(bookmarks[0]));
 			prevNum.setText("1/" + bookmarks.length);
 			currPrevNum = 0;
+
+			
+			previewBut.setEnabled(true);
+			previewBut.setText("Generate Bookmarks");
 		}
 		else if(e.getSource().equals(selectSaveBut))
 		{
@@ -429,8 +450,11 @@ public class BookmarkPanel extends JSplitPane implements ActionListener{
 		{
 			if(bg.hasBookmarks())
 			{
-				bg.saveAsPngs(saveField.getText());
+				saveBut.setEnabled(false);
+
 				bg.createPDF(saveField.getText());
+				
+				saveBut.setEnabled(true);
 			}
 		}
 		

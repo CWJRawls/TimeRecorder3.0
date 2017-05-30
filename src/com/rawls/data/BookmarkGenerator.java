@@ -21,6 +21,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+import com.rawls.gui.BookmarkProgressFrame;
 import com.rawls.io.ExtensionManager;
 import com.rawls.storage.SwimmerMasterList;
 
@@ -453,6 +454,9 @@ public class BookmarkGenerator {
 	public void createPDF(String fPath)
 	{
 		BufferedImage[] pages = setBookmarksIntoPages();
+
+		
+		int pageProgress = 80 / pages.length; //how much to add to the progress bar per iteration
 		
 		PDDocument doc = new PDDocument();
 		
@@ -493,10 +497,10 @@ public class BookmarkGenerator {
 		File outputFolder = new File(ExtensionManager.getEnclosingDirectoryPath(path));
 		outputFolder.mkdirs(); //just make sure that everything exists in the specified path
 		
+		
 		try {
 			doc.save(outputFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.err.println("PDF Save Failed!");
 			e.printStackTrace();
 		}
