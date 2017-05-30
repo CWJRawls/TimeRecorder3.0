@@ -20,7 +20,7 @@ public class DataImporter {
 	
 	private static final String CSV_DATE = "date"; //used in csv parsing to find the date line
 	private static final String[] CSV_LENGTHS = {"25", "50", "100", "200"};
-	private static final String[] CSV_STROKES = {"Freestyle", "Backstroke", "Breaststroke", "Butterfly","IM"}; 
+	private static final String[] CSV_STROKES = {"Freestyle", "free", "Backstroke", "back", "Breaststroke", "breast", "Butterfly","fly","IM"}; 
 	
 	private static XStream xstream = new XStream();
 	
@@ -218,7 +218,11 @@ public class DataImporter {
 					{
 						if(stroke.equalsIgnoreCase(CSV_STROKES[i]))
 						{
-							stroke = CSV_STROKES[i];
+							if(i % 2 == 1)
+								stroke = CSV_STROKES[i-1];
+							else
+								stroke = CSV_STROKES[i];
+							
 							strokeFound = true;
 						}
 					}
