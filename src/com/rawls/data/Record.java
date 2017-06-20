@@ -138,17 +138,37 @@ public class Record implements Serializable, Comparable<Record> {
 		formattedDate = getDate();
 	}
 	
+	//function to sort a list of records
+	public static void sortRecordList(Record[] r)
+	{
+		if(r.length > 1) //make sure there is something to sort
+		{
+			for(int i = 1; i < r.length; i++)
+			{
+				for(int j = i; j > 0; j--)
+				{
+					if(r[j].compareTo(r[j - 1]) < 0)
+					{
+						Record temp = r[j];
+						r[j] = r[j - 1];
+						r[j - 1] = temp;
+					}
+				}
+			}
+		}
+	}
+	
 	@Override
 	public int compareTo(Record o) {
 		
 		//First Sort Events Alphabetically
 		if(o.getEvent().compareToIgnoreCase(event) < 0)
 		{
-			return -1;
+			return 1;
 		}
 		else if(o.getEvent().compareToIgnoreCase(event) > 0)
 		{
-			return 1;
+			return -1;
 		}
 		else
 		{

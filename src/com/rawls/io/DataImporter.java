@@ -22,6 +22,8 @@ public class DataImporter {
 	private static final String[] CSV_LENGTHS = {"25", "50", "100", "200"};
 	private static final String[] CSV_STROKES = {"Freestyle", "free", "Backstroke", "back", "Breaststroke", "breast", "Butterfly","fly","IM"}; 
 	
+	private static final String NULL_PREV_NAME = "NULL";
+	
 	private static XStream xstream = new XStream();
 	
 	public static void completeMapping()
@@ -133,13 +135,16 @@ public class DataImporter {
 		//just realized I left c syntax here, oops
 		int[] date = RecorderMain.getDate();
 		
+		String prevNameF = NULL_PREV_NAME;
+		String prevNameL = NULL_PREV_NAME;
+		
 		Scanner scan = null;
 		
 		try {
 			//open a scanner to read the file
 			scan = new Scanner(csvFile);
 			
-			int lineNum = 0;
+			int lineNum = 1;
 			
 			//iterate through the contents 
 			while(scan.hasNextLine()) {
@@ -149,15 +154,17 @@ public class DataImporter {
 				//split the line on the comma
 				String[] contents = line.split(",");
 				
+				String caseStr = trimWhitespace(contents[0]);
+				
 				//check if this is a date line first
-				if(contents[0].equalsIgnoreCase(CSV_DATE))
+				if(caseStr.equalsIgnoreCase(CSV_DATE))
 				{
 					//if so, attempt to change the date
 					try {
 						int newDate[] = new int[3];
 						//this block is most likely to produce an error
-						newDate[0] = Integer.parseInt(contents[1]);
-						newDate[1] = Integer.parseInt(contents[2]);
+						newDate[0] = Integer.parseInt(contents[2]);
+						newDate[1] = Integer.parseInt(contents[1]);
 						newDate[2] = Integer.parseInt(contents[3]);
 						
 						//if we get here, we should be safe
@@ -167,10 +174,82 @@ public class DataImporter {
 						e.printStackTrace();
 					}
 				}
+				else if(caseStr.equals("")) //test for empty first string for block entry
+				{
+					if(prevNameF.equals(NULL_PREV_NAME)) //avoid assigning to null
+					{
+						JOptionPane.showMessageDialog(null, "Error, could not find name to assign time to!");
+						break;
+					}
+					
+					Swimmer s = SwimmerMasterList.getSwimmer(prevNameF + " " + prevNameL);
+					
+					//check the swim length
+					String length = contents[2];
+					
+					boolean lengthFound = false;
+					
+					//make the string standard
+					for(int i = 0; i < CSV_LENGTHS.length && !lengthFound; i++)
+					{
+						if(length.equalsIgnoreCase(CSV_LENGTHS[i]))
+						{
+							length = CSV_LENGTHS[i];
+							lengthFound = true;
+						}
+					}
+					
+					if(!lengthFound)
+						length = "25";
+					
+					//check the stroke
+					String stroke = contents[3];
+					
+					boolean strokeFound = false;
+					
+					for(int i = 0; i < CSV_STROKES.length && !strokeFound; i++)
+					{
+						if(stroke.equalsIgnoreCase(CSV_STROKES[i]))
+						{
+							if(i % 2 == 1)
+								stroke = CSV_STROKES[i-1];
+							else
+								stroke = CSV_STROKES[i];
+							
+							strokeFound = true;
+						}
+					}
+					
+					if(!strokeFound)
+						stroke = CSV_STROKES[0];
+					
+					String event = length + " " + stroke;
+					
+					int[] time = new int[3];
+					
+					boolean goodTime = true;
+					
+					try {
+						time[0] = Integer.parseInt(contents[4]);
+						time[1] = Integer.parseInt(contents[5]);
+						time[2] = Integer.parseInt(contents[6]);
+					} catch (Exception e) {
+						goodTime = false;
+						System.err.println("Malformed Time Entry");
+						e.printStackTrace();
+					}
+					
+					if(goodTime)
+						s.addRecord(new Record(event, time[0],time[1],time[2],date[0],date[1],date[2]));
+					
+				}
 				else if(contents.length == 7)
 				{
-					String fname = contents[0];
-					String lname = contents[1];
+					String fname = trimWhitespace(contents[0]);
+					String lname = trimWhitespace(contents[1]);
+					
+					prevNameF = fname;
+					prevNameL = lname;
 					
 					String testname = fname + " " + lname;
 					String testname2 = lname + " " + fname; //try inverting in the case the name was entered backwards
@@ -189,6 +268,18 @@ public class DataImporter {
 					if(!s.getFormattedName().equalsIgnoreCase(testname2) && !s.getFormattedName().equalsIgnoreCase(testname))
 					{
 						s = getMysterySwimmer(fname, lname);
+					}
+					
+					if(s.getFName().equals("Tempe")) //check for declined assignment which results in default being returned
+					{	
+						prevNameF = NULL_PREV_NAME; //don't use this name
+						prevNameL = NULL_PREV_NAME;
+						break;
+					}
+					else //update the prevName fields to avoid repeating the process later
+					{
+						prevNameF = s.getFName();
+						prevNameL = s.getLName();
 					}
 					
 					//check the swim length
@@ -252,7 +343,7 @@ public class DataImporter {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(null, "Error on line: " + lineNum + "Not enough arguments!");
+					JOptionPane.showMessageDialog(null, "Error on line: " + lineNum + ". Not enough arguments!");
 				}
 				
 				lineNum++;
@@ -339,5 +430,29 @@ public class DataImporter {
 			//RecorderMain.printStartingOptions();
 			
 		}
+	}
+	
+	/*
+	 * Method to get rid of hidden whitespace characters on key strings for data input
+	 */
+	public static String trimWhitespace(String s)
+	{
+		if(s.length() > 0)
+		{
+			//trim from the front
+			while(s.charAt(0) == ' ')
+			{
+				s = s.substring(1);
+			}
+			
+			//trim from the back
+			while(s.charAt(s.length() - 1) == ' ')
+			{
+				s = s.substring(0, s.length() - 1);
+			}
+		}
+		
+		return s;
+			
 	}
 }
