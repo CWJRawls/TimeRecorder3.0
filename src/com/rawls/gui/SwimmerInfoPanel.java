@@ -35,7 +35,7 @@ public class SwimmerInfoPanel extends JPanel implements ActionListener{
 	private String butText = "Options";
 	
 	private JComboBox<String>[] menus = new JComboBox[2];
-	private String[] strokes = {"Freestyle", "Backstroke", "Breaststroke", "Butterfly, IM"};
+	private String[] strokes = {"Freestyle", "Backstroke", "Breaststroke", "Butterfly", "IM"};
 	private String[] distances = {"25", "50", "100", "200"};
 	private JTextField[] time = new JTextField[3];
 	private JTextField[] date = new JTextField[3];

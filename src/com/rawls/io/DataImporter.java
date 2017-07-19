@@ -237,6 +237,12 @@ public class DataImporter {
 						goodTime = false;
 						System.err.println("Malformed Time Entry");
 						e.printStackTrace();
+						int errResult = JOptionPane.showConfirmDialog(null, "Time on line " + lineNum + " has an error.\nWould you like to fix it?", "Time Entry Error", JOptionPane.YES_NO_OPTION);
+						
+						if(errResult == JOptionPane.YES_OPTION)
+						{
+							
+						}
 					}
 					
 					if(goodTime)
@@ -335,6 +341,20 @@ public class DataImporter {
 						goodTime = false;
 						System.err.println("Malformed Time Entry");
 						e.printStackTrace();
+						int result = JOptionPane.showConfirmDialog(null, "Error in time entered on line " + lineNum + ".\nWould youl like to fix it?", "Time Entry Error", JOptionPane.YES_NO_OPTION);
+						
+						if(result == JOptionPane.YES_OPTION)
+						{
+							String[] originalTime = {contents[4], contents[5], contents[6]};
+							int[] newTime = fixTime(originalTime);
+							
+							if(newTime != null)
+							{
+								time[0] = newTime[0];
+								time[1] = newTime[1];
+								time[2] = newTime[2];
+							}
+						}
 					}
 					
 					if(goodTime)
@@ -392,6 +412,14 @@ public class DataImporter {
 		}
 		
 		return s;
+	}
+	
+	private static int[] fixTime(String[] original)
+	{
+		int[] time = null;
+		
+		
+		return time;
 	}
 	
 	/* !!!!! This Method is Legacy and is no Longer Called !!!!! */

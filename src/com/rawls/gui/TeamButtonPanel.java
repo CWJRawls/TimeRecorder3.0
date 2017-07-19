@@ -119,32 +119,44 @@ public class TeamButtonPanel extends JPanel implements ActionListener{
 	
 	public void findSwimmerByName()
 	{
-		String result = JOptionPane.showInputDialog(this, "Please Enter The Name of the Swimmwer (First Last)");
+		InputNamePanel inp = new InputNamePanel();
 		
-		String[] names = result.split(" ");
+		int result = JOptionPane.showConfirmDialog(this, inp, "Find Swimmer By Name", JOptionPane.YES_NO_OPTION);
 		
+		if(result == JOptionPane.YES_OPTION)
+		{
+			String[] names = inp.getEntries();
+			
+			Swimmer s = SwimmerMasterList.getSwimmer(names[0] + " " + names[1]);
+			
+			if(s.getFName().equals("Tempe") && s.getLName().equals("Swimmer"))
+			{
+				int noResult = JOptionPane.showConfirmDialog(this, "No Swimmer named " + names[0] + " " + names[1] + " found. Create a new Swimmer?", "No Swimmer Found", JOptionPane.YES_NO_OPTION);
+				
+				if(noResult == JOptionPane.YES_OPTION)
+				{
+					Swimmer newSwimmer = new Swimmer(names[0], names[1]);
+					
+					SwimmerMasterList.addSwimmer(newSwimmer);
+					
+					RecorderMain.viewSwimmer(newSwimmer);
+				}
+				return;
+			}
+			
+			RecorderMain.viewSwimmer(s);
+			
+		}
+		
+		//String[] names = result.split(" ");
+		/*
 		if(names.length < 2)
 		{
 			JOptionPane.showMessageDialog(this, "Full Name Not Entered!");
 			return;
 		}
+		*/
 		
-		if(SwimmerMasterList.hasSwimmers())
-		{
-			int swim;
-			for(swim = 0; swim < SwimmerMasterList.size(); swim++)
-			{
-				Swimmer s = SwimmerMasterList.getSwimmer(swim);
-				
-				if(s.getFName().equalsIgnoreCase(names[0]) && s.getLName().equalsIgnoreCase(names[1]))
-				{
-					RecorderMain.viewSwimmer(s);
-					return;
-				}
-			}
-			
-			JOptionPane.showMessageDialog(this, "Could Not Find Swimmer: " + result);
-		}
 	}
 	
 	private void openSwimmer()
